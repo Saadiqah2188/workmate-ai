@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- AI calls run in the browser with the user's own provider key (`src/lib/ai/client.ts`, OpenAI-compatible streaming) — the user explicitly required no backend, database or auth; do not add server functions or Lovable Cloud unless asked.
+- Prompt templates live only in `src/lib/ai/prompts.ts` so every feature's structured prompt is tested in one place (`src/lib/ai/ai.test.ts`).
+- Browser persistence goes through `usePersistentState` (reads after mount to avoid hydration mismatches); AI settings use the `useAiSettings` external store so every screen updates together.
+- Website text for research is fetched via the public Jina Reader because browsers can't read most sites directly (CORS).
