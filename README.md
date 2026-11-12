@@ -1,54 +1,84 @@
-# Workmate AI
+# Workmate AI – AI Workplace Productivity Assistant
 
-Build a modern, responsive SaaS web application called AI Workplace Productivity Assistant.
+## 1. Project Overview
 
-Design: Professional dashboard with sidebar navigation, clean white backgrounds, rounded cards, subtle shadows and modern typography. Use Primary Blue (#2563EB) and Accent Teal (#14B8A6). Ensure full desktop and mobile responsiveness.
+Workmate AI is an AI-powered workplace productivity application designed to help professionals simplify everyday workplace tasks. The application provides tools that assist with writing professional emails, conducting research and answering workplace-related questions.
 
-Core Features:
+The main aim of this project is to demonstrate how Artificial Intelligence can be used to improve productivity, save time and support better communication in a professional environment.
 
-Dashboard: Welcome screen, feature overview and quick-access cards.
+## 2. Features Implemented
 
-Smart Email Generator: Generate professional emails from user instructions, with Formal, Friendly and Persuasive tone options. Include editable outputs, copy and regenerate buttons.
+### Smart Email Generator
+- Generates professional emails based on user instructions.
+- Supports three different writing tones: Formal, Friendly and Persuasive.
+- Allows users to review and edit AI-generated emails.
 
-AI Research Assistant: Accept research topics, pasted articles and website URLs. Generate detailed summaries, key findings, insights and recommendations.
+### AI Research Assistant
+- Helps users research different topics.
+- Summarises supplied information and articles.
+- Provides key insights and recommendations.
+- Helps users understand information more efficiently.
 
-AI Chatbot: Interactive workplace assistant that responds intelligently to user prompts and maintains conversation context.
+### AI Workplace Chatbot
+- Provides an interactive AI-powered chat interface.
+- Responds to workplace-related questions and prompts.
+- Assists with brainstorming, writing and general workplace tasks.
 
-Requirements:
+### Dashboard and User Interface
+- Modern and professional SaaS-style dashboard.
+- Sidebar navigation for easy access to features.
+- Responsive design for different screen sizes.
+- Professional colour scheme using Primary Blue (#2563EB) and Accent Teal (#14B8A6).
+- Editable AI-generated outputs.
 
-Use structured AI prompts for relevant, context-aware responses.
+### Responsible AI
+The application includes a responsible AI approach. Users are encouraged to review and verify AI-generated information before using it for professional purposes.
 
-AI-generated content must be dynamic, never hardcoded or generic.
+## 3. Technologies and Tools Used
 
-Include loading states, error handling and editable results.
+The following technologies and tools were used in developing this project:
 
-No backend, database or authentication.
+- **Lovable:** AI-assisted application development.
+- **React:** Building the user interface and application components.
+- **Tailwind CSS:** Styling and responsive design.
+- **Lovable AI:** Providing AI-generated responses and functionality.
+- **JavaScript:** Application functionality and interactions.
+- **GitHub:** Project repository and version management.
 
-Use browser-based AI API integration with a user-provided API key. Clearly explain API key security limitations.
+## 4. Setup Instructions
 
-Use local storage for conversation history and preferences where appropriate.
+### Accessing the Application
 
-Include a responsible AI disclaimer reminding users to verify generated information.
+1. Open the Workmate AI application using its published link or Lovable project preview.
+2. Navigate through the dashboard using the sidebar.
+3. Select the feature you would like to use.
+4. Enter your instructions or questions.
+5. Generate your AI response.
+6. Review and edit the generated content where necessary.
 
-Important: Prioritise functional AI features, clean reusable components and a polished SaaS dashboard. Avoid unnecessary features to minimise development complexity.
+### Running the Project Locally
 
-This project was built with [Lovable](https://lovable.dev).
+1. Clone or download the project repository from GitHub.
+2. Open the project folder in your code editor.
+3. Open the terminal.
+4. Install the project dependencies:
 
-## Build with Lovable
+   `npm install`
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/eaddd58a-b2fb-4807-b1d1-da5fdcb3ad55).
+5. Start the development server:
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+   `npm run dev`
 
-## Development
+6. Open the local development URL displayed in your terminal.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+**Note:** The AI features require the Lovable AI integration to be configured and available. The exact setup may depend on the project's configuration.
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+## 5. Responsible AI Disclaimer
+
+Workmate AI is designed to assist with workplace productivity and should not replace human judgement. AI-generated content may occasionally contain inaccurate or incomplete information. Users should verify important facts and review all generated content before sharing or relying on it professionally.
+
+## 6. Conclusion
+
+Workmate AI demonstrates how AI technology can be integrated into everyday workplace activities. By combining email generation, research assistance and an interactive chatbot in one application, the project aims to make common professional tasks easier, faster and more efficient.
+
+**Developed using Lovable as an AI Workplace Productivity Assistant project.**
