@@ -5,11 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { BrandMark } from "@/components/app/brand-mark";
 import { Markdown } from "@/components/app/markdown";
-import { ApiKeyCallout } from "@/components/app/api-key-callout";
 import { ErrorBanner } from "@/components/app/error-banner";
-import { describeError, streamChat } from "@/lib/ai/client";
-import { getAiSettings } from "@/lib/ai/settings";
-import { buildChatMessages } from "@/lib/ai/prompts";
+import { describeError, streamAi } from "@/lib/ai/client";
 import { STORAGE_KEYS, usePersistentState } from "@/hooks/use-persistent-state";
 import { useCopy } from "@/hooks/use-copy";
 import { cn } from "@/lib/utils";
@@ -72,10 +69,11 @@ function ChatPage() {
     setLoading(true);
     setMessages([...history, { id: assistantId, role: "assistant", content: "" }]);
     try {
-      await streamChat({
-        settings: getAiSettings(),
-        messages: buildChatMessages(history),
-        temperature: 0.7,
+      await streamAi({
+        task: {
+          feature: "chat",
+          history: history.map((m) => ({ role: m.role, content: m.content })),
+        },
         signal: controller.signal,
         onToken: (text) =>
           setMessages((prev) => prev.map((m) => (m.id === assistantId ? { ...m, content: text } : m))),
@@ -134,7 +132,6 @@ function ChatPage() {
 
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto w-full max-w-3xl space-y-6 px-4 py-6 md:px-6">
-          <ApiKeyCallout />
           {empty && (
             <div className="animate-fade-up py-8 text-center">
               <BrandMark className="mx-auto size-14 rounded-2xl" />

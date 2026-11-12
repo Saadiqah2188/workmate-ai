@@ -1,4 +1,8 @@
-import type { ChatMessage } from "./client";
+export type ChatRole = "system" | "user" | "assistant";
+export interface ChatMessage {
+  role: ChatRole;
+  content: string;
+}
 
 export type EmailTone = "formal" | "friendly" | "persuasive";
 export type EmailLength = "short" | "medium" | "detailed";
@@ -132,3 +136,9 @@ export function buildChatMessages(history: { role: "user" | "assistant"; content
     ...history.slice(-CHAT_CONTEXT_TURNS).map((m) => ({ role: m.role, content: m.content })),
   ];
 }
+
+/** Tiny request used by Settings to confirm the AI connection works. */
+export const PING_MESSAGES: ChatMessage[] = [
+  { role: "system", content: "You are a connection check. Reply with exactly the single word: Connected" },
+  { role: "user", content: "Connection check" },
+];

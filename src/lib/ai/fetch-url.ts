@@ -14,7 +14,7 @@ export function normaliseUrl(input: string): string | null {
 
 /**
  * Browsers block reading most websites directly (CORS), so page text is extracted
- * through the public Jina Reader service. The URL — not your API key — is sent to it.
+ * through the public Jina Reader service. Only the URL is sent to it.
  */
 export async function fetchUrlText(url: string, signal?: AbortSignal): Promise<string> {
   let res: Response;

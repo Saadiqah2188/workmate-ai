@@ -7,4 +7,4 @@ export const NAV_ITEMS = [
   { title: "AI Chatbot", url: "/chat", icon: MessagesSquare },
 ] as const;
 
-export const SETTINGS_ITEM = { title: "Settings & API key", url: "/settings", icon: Settings } as const;
+export const SETTINGS_ITEM = { title: "Settings", url: "/settings", icon: Settings } as const;

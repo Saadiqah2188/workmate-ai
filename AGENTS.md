@@ -31,7 +31,7 @@ use the editor.
 
 ## Project rules
 
-- AI calls run in the browser with the user's own provider key (`src/lib/ai/client.ts`, OpenAI-compatible streaming) — the user explicitly required no backend, database or auth; do not add server functions or Lovable Cloud unless asked.
+- AI calls go through one server route (`src/routes/api/ai.ts`) that validates a feature-specific request (`src/lib/ai/tasks.ts`) and streams NDJSON from the Lovable AI Gateway (`src/lib/ai/gateway.server.ts`) — the server builds prompts itself so the public endpoint can only run the app's own features. No database or auth (user requirement).
 - Prompt templates live only in `src/lib/ai/prompts.ts` so every feature's structured prompt is tested in one place (`src/lib/ai/ai.test.ts`).
-- Browser persistence goes through `usePersistentState` (reads after mount to avoid hydration mismatches); AI settings use the `useAiSettings` external store so every screen updates together.
+- Browser persistence goes through `usePersistentState` (reads after mount to avoid hydration mismatches).
 - Website text for research is fetched via the public Jina Reader because browsers can't read most sites directly (CORS).

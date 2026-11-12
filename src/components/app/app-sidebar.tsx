@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { KeyRound, ShieldCheck } from "lucide-react";
+import { useEffect } from "react";
+import { Sparkles } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -13,8 +14,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { useAiSettings } from "@/lib/ai/settings";
-import { PROVIDERS } from "@/lib/ai/providers";
 import { BrandMark } from "./brand-mark";
 import { NAV_ITEMS, SETTINGS_ITEM } from "./nav-items";
 
@@ -22,8 +21,16 @@ export function AppSidebar() {
   const { state, setOpenMobile, isMobile } = useSidebar();
   const collapsed = state === "collapsed" && !isMobile;
   const pathname = useRouterState({ select: (r) => r.location.pathname });
-  const settings = useAiSettings();
-  const connected = Boolean(settings.apiKey);
+
+  // Earlier versions stored a personal API key in this browser; it's no longer used, so remove it.
+  useEffect(() => {
+    try {
+      localStorage.removeItem("awpa.settings");
+      sessionStorage.removeItem("awpa.apiKey");
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
 
   const close = () => setOpenMobile(false);
 
@@ -94,22 +101,12 @@ export function AppSidebar() {
             onClick={close}
             className="flex items-center gap-3 rounded-xl border border-border bg-gradient-soft p-3 transition-shadow hover:shadow-card"
           >
-            <div
-              className={
-                connected
-                  ? "grid size-8 place-items-center rounded-lg bg-teal-soft text-teal-strong"
-                  : "grid size-8 place-items-center rounded-lg bg-warning-soft text-warning-foreground"
-              }
-            >
-              {connected ? <ShieldCheck className="size-4" /> : <KeyRound className="size-4" />}
+            <div className="grid size-8 place-items-center rounded-lg bg-teal-soft text-teal-strong">
+              <Sparkles className="size-4" />
             </div>
             <div className="min-w-0 text-xs">
-              <p className="font-semibold text-foreground">
-                {connected ? PROVIDERS[settings.provider].label : "No API key yet"}
-              </p>
-              <p className="truncate text-muted-foreground">
-                {connected ? settings.model : "Add a key to start"}
-              </p>
+              <p className="font-semibold text-foreground">Built-in AI</p>
+              <p className="truncate text-muted-foreground">Connected · no setup needed</p>
             </div>
           </Link>
         </SidebarFooter>

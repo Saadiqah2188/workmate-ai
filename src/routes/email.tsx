@@ -8,13 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { PageHeader } from "@/components/app/page-header";
 import { OutputPanel } from "@/components/app/output-panel";
 import { AiDisclaimer } from "@/components/app/ai-disclaimer";
-import { ApiKeyCallout } from "@/components/app/api-key-callout";
 import { ErrorBanner } from "@/components/app/error-banner";
 import { cn } from "@/lib/utils";
-import { describeError, streamChat } from "@/lib/ai/client";
-import { getAiSettings } from "@/lib/ai/settings";
+import { describeError, streamAi } from "@/lib/ai/client";
 import {
-  buildEmailMessages,
   EMAIL_TONES,
   type EmailLength,
   type EmailTone,
@@ -87,17 +84,18 @@ function EmailPage() {
     setLoading(true);
     setOutput("");
     try {
-      await streamChat({
-        settings: getAiSettings(),
-        messages: buildEmailMessages({
-          instructions,
-          recipient,
-          senderName: prefs.senderName,
-          tone: prefs.tone,
-          length: prefs.length,
-          previousDraft,
-        }),
-        temperature: regenerate ? 0.95 : 0.7,
+      await streamAi({
+        task: {
+          feature: "email",
+          request: {
+            instructions,
+            recipient,
+            senderName: prefs.senderName,
+            tone: prefs.tone,
+            length: prefs.length,
+            previousDraft,
+          },
+        },
         signal: controller.signal,
         onToken: setOutput,
       });
@@ -118,7 +116,6 @@ function EmailPage() {
         title="Smart Email Generator"
         description="Describe what you need to say. Choose a tone, then edit, copy or regenerate the draft."
       />
-      <ApiKeyCallout />
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
         <form

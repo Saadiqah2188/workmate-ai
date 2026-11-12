@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2, KeyRound, Mail, MessagesSquare, Search, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, MessagesSquare, Search, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AiDisclaimer } from "@/components/app/ai-disclaimer";
-import { useAiSettings } from "@/lib/ai/settings";
 import heroTools from "@/assets/hero-tools.png";
 
 export const Route = createFileRoute("/")({
@@ -17,7 +16,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "AI Workplace Productivity Assistant" },
       {
         property: "og:description",
-        content: "Generate emails, analyse research and chat with an AI workplace assistant — using your own API key.",
+        content: "Generate emails, analyse research and chat with an AI workplace assistant — built-in AI, no setup needed.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -54,9 +53,6 @@ const FEATURES = [
 ] as const;
 
 function Dashboard() {
-  const settings = useAiSettings();
-  const connected = Boolean(settings.apiKey);
-
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-6 md:px-8 md:py-8">
       {/* Welcome */}
@@ -71,8 +67,8 @@ function Dashboard() {
               Welcome back. What can we get done today?
             </h1>
             <p className="mt-3 max-w-lg text-sm text-primary-foreground/85 sm:text-base">
-              Draft emails, digest research and get answers in seconds — powered by the AI provider
-              you choose.
+              Draft emails, digest research and get answers in seconds — powered by built-in AI, with
+              nothing to set up.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild size="lg" variant="secondary" className="rounded-xl">
@@ -80,13 +76,11 @@ function Dashboard() {
                   Write an email <ArrowRight />
                 </Link>
               </Button>
-              {!connected && (
-                <Button asChild size="lg" variant="teal" className="rounded-xl">
-                  <Link to="/settings">
-                    <KeyRound /> Add API key
-                  </Link>
-                </Button>
-              )}
+              <Button asChild size="lg" variant="teal" className="rounded-xl">
+                <Link to="/chat">
+                  <MessagesSquare /> Ask Workmate
+                </Link>
+              </Button>
             </div>
           </div>
           <img
@@ -141,9 +135,9 @@ function Dashboard() {
           <ol className="mt-4 space-y-4">
             {[
               {
-                title: "Connect your AI provider",
-                body: "Add an OpenAI, Google Gemini or OpenRouter API key in Settings.",
-                done: connected,
+                title: "AI is ready",
+                body: "Built-in AI is already connected — no account or API key needed.",
+                done: true,
               },
               {
                 title: "Pick a tool",
@@ -180,11 +174,11 @@ function Dashboard() {
             <h2 className="font-bold text-foreground">Private by design</h2>
           </div>
           <p className="mt-2 flex-1 text-sm text-muted-foreground">
-            There are no accounts and no servers here. Your key, chats and preferences stay in this
-            browser and requests go straight to your AI provider.
+            No accounts and no API keys. Your chats and preferences are saved only in this browser,
+            and your requests are sent securely to the built-in AI just to generate a reply.
           </p>
           <Button asChild variant="outline" className="mt-4 w-full sm:w-auto">
-            <Link to="/settings">Review key security</Link>
+            <Link to="/settings">Privacy & data</Link>
           </Button>
         </div>
       </section>

@@ -8,11 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { PageHeader } from "@/components/app/page-header";
 import { OutputPanel } from "@/components/app/output-panel";
 import { AiDisclaimer } from "@/components/app/ai-disclaimer";
-import { ApiKeyCallout } from "@/components/app/api-key-callout";
 import { ErrorBanner } from "@/components/app/error-banner";
-import { describeError, streamChat } from "@/lib/ai/client";
-import { getAiSettings } from "@/lib/ai/settings";
-import { buildResearchMessages } from "@/lib/ai/prompts";
+import { describeError, streamAi } from "@/lib/ai/client";
 import { fetchUrlText, normaliseUrl } from "@/lib/ai/fetch-url";
 import { STORAGE_KEYS, usePersistentState } from "@/hooks/use-persistent-state";
 
@@ -86,10 +83,11 @@ function ResearchPage() {
         urlContent = await fetchUrlText(normalised, controller.signal);
       }
       setStage("analysing");
-      const result = await streamChat({
-        settings: getAiSettings(),
-        messages: buildResearchMessages({ topic, article, url: normalised ?? undefined, urlContent }),
-        temperature: 0.4,
+      const result = await streamAi({
+        task: {
+          feature: "research",
+          request: { topic, article, url: normalised ?? undefined, urlContent },
+        },
         signal: controller.signal,
         onToken: setOutput,
       });
@@ -116,7 +114,6 @@ function ResearchPage() {
         title="AI Research Assistant"
         description="Give a topic, a website URL, pasted article text — or any combination — and get a structured analysis."
       />
-      <ApiKeyCallout />
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <form
